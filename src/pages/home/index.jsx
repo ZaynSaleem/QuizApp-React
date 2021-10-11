@@ -20,18 +20,24 @@ import {
 } from "reactstrap";
 // import { useHistory } from "react-router-dom";
 import { useEffect,useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Index = () => {
   const [data, setdata] = useState([]);
   const [mainQuiz, setmainQuiz] = useState("");
-  
+  let history = useHistory();  
   useEffect(() => {
     let get = JSON.parse(localStorage.getItem("Quiz"));
-    setdata(get);
+    if (get && get.length) {
+      
+      setdata(get);
+    }
   },[]);
   
-  const valueGet = () => {
-    
+  const valueGet = (id) => {
+    // console.log(id);
+    localStorage.setItem('selectedvalue',JSON.stringify(id));
+    history.push("/quiz-subcategory");
   }
   const createquiz = () => {
     if (mainQuiz == "") {
@@ -89,7 +95,7 @@ const Index = () => {
       <div>
         <Row className="mt-4">
 
-          {data.map((item, index) => {
+          {data.length ? data.map((item, index) => {
             return(
             <Col md={4} key={index}>
             <Card >
@@ -101,12 +107,12 @@ const Index = () => {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </CardText>
-                <Button color="outline-success" >Show Quiz</Button>
+                <Button color="outline-success" onClick={() => valueGet(item.id)}>Show Quiz</Button>
               </CardBody>
             </Card>
           </Col>
             )
-          })}
+          }):null}
         </Row>
       </div>
     </Container>
