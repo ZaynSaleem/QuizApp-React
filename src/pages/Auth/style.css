@@ -1,0 +1,45 @@
+.sign-up-box{
+    width: 50%;
+    margin: auto;
+    display: block;
+    border: 1px solid lightgrey;
+    border-radius: 0px 0px 5px 5px;
+    padding: 40px;
+    box-shadow: 6px 6px 16px rgb(206, 206, 206);
+}
+
+.signup-button{
+    float: right;
+}
+.sign-up-text{
+    width: 50%;
+    margin: auto;
+    display: block;
+    text-align: center;
+    background-color: #585858;
+    color: whitesmoke;
+    padding: 32px;
+}
+
+.login-box{
+    width: 50%;
+    margin: auto;
+    display: block;
+    border: 1px solid lightgrey;
+    border-radius: 0px 0px 5px 5px;
+    padding: 30px;
+    box-shadow: 6px 6px 16px rgb(206, 206, 206);
+}
+
+.login-button{
+    float: right;
+}
+.login-text{
+    width: 50%;
+    margin: auto;
+    display: block;
+    text-align: center;
+    background-color: #64a958;
+    color: whitesmoke;
+    padding: 32px;
+}

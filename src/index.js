@@ -4,15 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Subcategory from "./pages/Admin/subcategory";
 import Subcategory from "./pages/Admin/subCat";
 import Question from "./pages/Admin/question";
+import SignUp from "./pages/Auth/signup";
+import Index from "./pages/home/index";
+import Login from "./pages/Auth/login";
+import UserQuestion from "./pages/home/userquestion";
+
 
 
 ReactDOM.render(
@@ -23,13 +23,22 @@ ReactDOM.render(
   <Router>
     <Switch>
       <Route exact path="/">
-        <App />
+        <SignUp />
+      </Route>
+      <Route exact path="/login-user">
+        <Login />
+      </Route>
+      <Route exact path="/user-panel">
+        <Index />
       </Route>
       <Route path="/quiz-subcategory">
         <Subcategory />
       </Route>
       <Route path="/add-question">
         <Question />
+      </Route>
+      <Route path="/user-quiz">
+        <UserQuestion />
       </Route>
     </Switch>
   </Router>,

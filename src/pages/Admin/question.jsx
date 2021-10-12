@@ -8,18 +8,16 @@ import {
   Row,
   Container,
   Label,
-  Form,
-  FormGroup,
-  FormText,
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
 } from "reactstrap";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import reactImg from "../../assets/javascript.jpg";
+// import { useHistory } from "react-router-dom";
+// import reactImg from "../../assets/javascript.jpg";
+import { FaTrashAlt } from "react-icons/fa";
+import "./style.css";
 
 const Question = () => {
   const [question, setquestion] = useState("");
@@ -46,7 +44,7 @@ const Question = () => {
     }
     // console.log();
   }, []);
-  console.log(showdata);
+  // console.log(showdata);
 
   const addQuestion = () => {
     let quizCatId = JSON.parse(localStorage.getItem("quizCatId"));
@@ -67,7 +65,7 @@ const Question = () => {
 
     if (get && get.length) {
       for (let i = 0; i < get.length; i++) {
-        if (get[i].Question == obj.Question) {
+        if (get[i].Question === obj.Question) {
           main = false;
           //   console.log(obj);
           alert("Already exist");
@@ -89,6 +87,19 @@ const Question = () => {
     setoption3("");
     setoption4("");
     setradiovalue("");
+  };
+
+  const dltQuestion = (e) => {
+    data.map((per, index) => {
+      if (per.id === e) {
+        console.log(per);
+        console.log(e + " & " + per.id + "Matched at index :" + index);
+        let dupdata = [...data];
+        dupdata.splice(index, 1);
+        setdata(dupdata);
+        localStorage.setItem("Questions", JSON.stringify(dupdata));
+      }
+    });
   };
 
   return (
@@ -132,12 +143,14 @@ const Question = () => {
           <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => setradiovalue(option2)}
-                  value={option2}
-                />{" "}
+                <Label check>
+                  <Input
+                    type="radio"
+                    name="radio1"
+                    onChange={() => setradiovalue(option2)}
+                    value={option2}
+                  />{" "}
+                </Label>
               </InputGroupText>
             </InputGroupAddon>
             <Input
@@ -153,12 +166,14 @@ const Question = () => {
           <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => setradiovalue(option3)}
-                  value={option3}
-                />{" "}
+                <Label check>
+                  <Input
+                    type="radio"
+                    name="radio1"
+                    onChange={() => setradiovalue(option3)}
+                    value={option3}
+                  />{" "}
+                </Label>
               </InputGroupText>
             </InputGroupAddon>
             <Input
@@ -174,12 +189,14 @@ const Question = () => {
           <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => setradiovalue(option4)}
-                  value={option4}
-                />
+                <Label check>
+                  <Input
+                    type="radio"
+                    name="radio1"
+                    onChange={() => setradiovalue(option4)}
+                    value={option4}
+                  />
+                </Label>
               </InputGroupText>
             </InputGroupAddon>
             <Input
@@ -199,27 +216,53 @@ const Question = () => {
       </Row>
 
       <Row>
-        {showdata.length
-          ? showdata.map((item, index) => {
-              return (
-                <Col md={12}>
-                  <Card>
-                    
-                    <CardBody>
-                      <CardTitle tag="h5" value={item.quizCat}>
-                        Question : <p>{item.Question}</p>
-                      </CardTitle>
-
-                      <CardText key={index}>
-                        {index}
-                      </CardText>
-                     
-                    </CardBody>
-                  </Card>
-                </Col>
-              );
-            })
-          : null}
+        {showdata.length ? (
+          showdata.map((item, index) => {
+            return (
+              <Col md={12} key={index}>
+                <Card className="mt-4">
+                  <CardBody>
+                    <CardTitle value={item.quizCat}>
+                      <b> Question {index + 1} : </b> {item.Question} ?
+                      <Button
+                        color="outline-danger"
+                        onClick={() => dltQuestion(item.id)}
+                        className="question-trash"
+                      >
+                        <FaTrashAlt />
+                      </Button>
+                    </CardTitle>
+                    <CardText>
+                      <b>A : </b> {item.option1}
+                    </CardText>
+                    <CardText>
+                      <b>B : </b>
+                      {item.option2}
+                    </CardText>
+                    <CardText>
+                      <b>C : </b>
+                      {item.option3}
+                    </CardText>
+                    <CardText>
+                      <b>D : </b>
+                      {item.option4}
+                    </CardText>
+                    <CardText>
+                      <b>Correct Answer : </b>
+                      {item.correctAnswer}
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </Col>
+            );
+          })
+        ) : (
+          <Card className="mt-4">
+            <CardBody>
+              <h5>No Question Added</h5>
+            </CardBody>
+          </Card>
+        )}
       </Row>
     </Container>
   );

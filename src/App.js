@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import Index from "../src/pages/home";
+// import Index from "../src/pages/home";
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <Index/>
+      {/* <Index/> */}
     </div>
   );
 }
