@@ -100,7 +100,7 @@ const SignUp = () => {
       </div>
       <div className="sign-up-box">
         <Row>
-          <Col>
+          <Col sm={12}>
             <Label>Username</Label>
             <Input
               type="text"
@@ -109,7 +109,7 @@ const SignUp = () => {
           </Col>
         </Row>
         <Row>
-          <Col className="mt-4">
+          <Col className="mt-4"  sm={12}>
             <Label>Email</Label>
             <Input
               type="email"
@@ -118,7 +118,7 @@ const SignUp = () => {
           </Col>
         </Row>
         <Row>
-          <Col className="mt-4">
+          <Col className="mt-4"  sm={12}>
             <Label>Password</Label>
             <Input
               type="password"
@@ -127,6 +127,14 @@ const SignUp = () => {
           </Col>
         </Row>
         <Row>
+          <Col>
+         <p className="mt-4" >
+           
+            Already a user? <a href="/login-user">click here</a> to login
+           </p>
+          
+          </Col>
+
           <Col>
             <Button
               color="outline-success"

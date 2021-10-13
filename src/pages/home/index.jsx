@@ -36,7 +36,7 @@ const Index = () => {
     localStorage.setItem("selectedvalue", JSON.stringify(id));
     history.push("/quiz-subcategory");
   };
- 
+
   const createquiz = () => {
     if (mainQuiz === "") {
       alert("Please Add Quiz");
@@ -77,8 +77,11 @@ const Index = () => {
     <Container>
       {user.email === "Admin@gmail.com" ? (
         <div>
-          <Row>
-            <Col md={4}>
+          <div className="admin-index-text">
+            <h4>QUIZ APP - ADMIN PANEL</h4>
+          </div>
+          <Row className="mt-4 admin-input">
+            <Col md={8} >
               <Input
                 onChange={(event) => setmainQuiz(event.target.value)}
                 value={mainQuiz}
@@ -93,41 +96,41 @@ const Index = () => {
             </Col>
           </Row>
           <div>
-          <Row className="mt-4">
-            {data.length
-              ? data.map((item, index) => {
-                  return (
-                    <Col md={4} key={index}>
-                      <Card>
-                        <CardImg
-                          top
-                          width="100%"
-                          src={reactImg}
-                          alt="Card image cap"
-                        />
-                        <CardBody>
-                          <CardTitle value={item.quiz}>
-                            <b>Subject : </b> {item.quiz}
-                          </CardTitle>
+            <Row className="mt-4">
+              {data.length
+                ? data.map((item, index) => {
+                    return (
+                      <Col md={4} key={index}>
+                        <Card>
+                          <CardImg
+                            top
+                            width="100%"
+                            src={reactImg}
+                            alt="Card image cap"
+                          />
+                          <CardBody>
+                            <CardTitle value={item.quiz}>
+                              <b>Subject : </b> {item.quiz}
+                            </CardTitle>
 
-                          <CardText>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
-                          </CardText>
-                          <Button
-                            color="outline-success"
-                            onClick={() => valueGet(item.id)}
-                          >
-                            Show Quiz
-                          </Button>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  );
-                })
-              : null}
-          </Row>
-        </div>
+                            <CardText>
+                              Some quick example text to build on the card title
+                              and make up the bulk of the card's content.
+                            </CardText>
+                            <Button
+                              color="outline-success"
+                              onClick={() => valueGet(item.id)}
+                            >
+                              Show Quiz
+                            </Button>
+                          </CardBody>
+                        </Card>
+                      </Col>
+                    );
+                  })
+                : null}
+            </Row>
+          </div>
         </div>
       ) : (
         <div>
