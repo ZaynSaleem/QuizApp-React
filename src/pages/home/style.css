@@ -1,6 +1,6 @@
 .admin-index-text{
     text-align: center;
-    background-color: #3e3e3e;
+    background-color: #161616;
     padding: 33px;
     color: white;
     letter-spacing: 1px;
@@ -14,3 +14,13 @@
     width: 80%;
     margin-left: auto;
 }
+
+.admin-index-subject{
+    text-align: center;
+    background-color: #202020;
+    padding: 13px;
+    color: white;
+    letter-spacing: 1px;
+    font-family: inherit;
+} 
+

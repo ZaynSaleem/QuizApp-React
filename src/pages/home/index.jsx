@@ -74,103 +74,110 @@ const Index = () => {
   // console.log(data);
 
   return (
-    <Container>
-      {user.email === "Admin@gmail.com" ? (
-        <div>
-          <div className="admin-index-text">
-            <h4>QUIZ APP - ADMIN PANEL</h4>
-          </div>
-          <Row className="mt-4 admin-input">
-            <Col md={8} >
-              <Input
-                onChange={(event) => setmainQuiz(event.target.value)}
-                value={mainQuiz}
-                placeholder="Create Quiz"
-              />
-            </Col>
+    <div>
+      <h4 className="admin-index-text">QUIZ APP - ADMIN PANEL</h4>
 
-            <Col md={4}>
-              <Button color="outline-primary" onClick={createquiz}>
-                Create Subject
-              </Button>
-            </Col>
-          </Row>
-          <div>
-            <Row className="mt-4">
-              {data.length
-                ? data.map((item, index) => {
-                    return (
-                      <Col md={4} key={index}>
-                        <Card>
-                          <CardImg
-                            top
-                            width="100%"
-                            src={reactImg}
-                            alt="Card image cap"
-                          />
-                          <CardBody>
-                            <CardTitle value={item.quiz}>
-                              <b>Subject : </b> {item.quiz}
-                            </CardTitle>
+      <h6 className="admin-index-subject">SUBJECT</h6>
 
-                            <CardText>
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
-                            </CardText>
-                            <Button
-                              color="outline-success"
-                              onClick={() => valueGet(item.id)}
-                            >
-                              Show Quiz
-                            </Button>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                    );
-                  })
-                : null}
-            </Row>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <Row className="mt-4">
-            {data.length
-              ? data.map((item, index) => {
-                  return (
-                    <Col md={4} key={index}>
-                      <Card>
-                        <CardImg
-                          top
-                          width="100%"
-                          src={reactImg}
-                          alt="Card image cap"
-                        />
-                        <CardBody>
-                          <CardTitle value={item.quiz}>
-                            <b>Subject : </b> {item.quiz}
-                          </CardTitle>
+      <div>
+        <Container>
+          {user.email === "Admin@gmail.com" ? (
+            <div>
+              <Row className="mt-4 admin-input">
+                <Col md={8}>
+                  <Input
+                    onChange={(event) => setmainQuiz(event.target.value)}
+                    value={mainQuiz}
+                    placeholder="ADD SUBJECT"
+                  />
+                </Col>
 
-                          <CardText>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
-                          </CardText>
-                          <Button
-                            color="outline-success"
-                            onClick={() => valueGet(item.id)}
-                          >
-                            Show Quiz
-                          </Button>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  );
-                })
-              : null}
-          </Row>
-        </div>
-      )}
-    </Container>
+                <Col md={4}>
+                  <Button color="outline-dark" onClick={createquiz}>
+                    ADD SUBJECT
+                  </Button>
+                </Col>
+              </Row>
+              <div>
+                <Row className="mt-4">
+                  {data.length
+                    ? data.map((item, index) => {
+                        return (
+                          <Col md={4} key={index}>
+                            <Card>
+                              <CardImg
+                                top
+                                width="100%"
+                                src={reactImg}
+                                alt="Card image cap"
+                              />
+                              <CardBody>
+                                <CardTitle value={item.quiz}>
+                                  <b>Subject : </b> {item.quiz}
+                                </CardTitle>
+
+                                <CardText>
+                                  Some quick example text to build on the card
+                                  title and make up the bulk of the card's
+                                  content.
+                                </CardText>
+                                <Button
+                                  color="outline-success"
+                                  onClick={() => valueGet(item.id)}
+                                >
+                                  Show Quiz
+                                </Button>
+                              </CardBody>
+                            </Card>
+                          </Col>
+                        );
+                      })
+                    : null}
+                </Row>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <Row className="mt-4">
+                {data.length
+                  ? data.map((item, index) => {
+                      return (
+                        <Col md={4} key={index}>
+                          <Card>
+                            <CardImg
+                              top
+                              width="100%"
+                              src={reactImg}
+                              alt="Card image cap"
+                            />
+                            <CardBody>
+                              <CardTitle value={item.quiz}>
+                                <b>Subject : </b> {item.quiz}
+                              </CardTitle>
+
+                              <CardText>
+                                Some quick example text to build on the card
+                                title and make up the bulk of the card's
+                                content.
+                              </CardText>
+                              <Button
+                                color="outline-success"
+                                onClick={() => valueGet(item.id)}
+                              >
+                                Show Quiz
+                              </Button>
+                            </CardBody>
+                          </Card>
+                        </Col>
+                      );
+                    })
+                  : null}
+              </Row>
+            </div>
+          )}
+        </Container>
+      </div>
+    </div>
   );
 };
 

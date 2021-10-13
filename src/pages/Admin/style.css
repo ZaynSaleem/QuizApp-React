@@ -1,3 +1,12 @@
 .question-trash{
     float: right;
 }
+
+.admin-input-subcat{
+
+    padding: 20px;
+}
+.admin-input Input{
+    width: 80%;
+    margin-left: auto;
+}
