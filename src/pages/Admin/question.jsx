@@ -44,8 +44,7 @@ const Question = () => {
     }
     // console.log();
   }, []);
-  // console.log(showdata);
-
+  
   const addQuestion = () => {
     let quizCatId = JSON.parse(localStorage.getItem("quizCatId"));
     // console.log(quizCatId);
@@ -59,10 +58,10 @@ const Question = () => {
       option4: option4,
       correctAnswer: radiovalue,
     };
-
+    
     let get = JSON.parse(localStorage.getItem("Questions"));
     let main = true;
-
+    
     if (get && get.length) {
       for (let i = 0; i < get.length; i++) {
         if (get[i].Question === obj.Question) {
@@ -88,6 +87,7 @@ const Question = () => {
     setoption4("");
     setradiovalue("");
   };
+  console.log(showdata);
 
   const dltQuestion = (e) => {
     data.map((per, index) => {

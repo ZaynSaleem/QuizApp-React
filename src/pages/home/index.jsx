@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 const Index = () => {
   const [data, setdata] = useState([]);
   const [mainQuiz, setmainQuiz] = useState("");
-  const [user, setuser] = useState([]);
+  const [user, setuser] = useState("");
   let history = useHistory();
   useEffect(() => {
     let get = JSON.parse(localStorage.getItem("Quiz"));
@@ -30,12 +30,22 @@ const Index = () => {
     if (user) {
       setuser(user);
     }
+    else{
+      history.push("/login-user");
+    }
   }, []);
+
   const valueGet = (id) => {
     // console.log(id);
     localStorage.setItem("selectedvalue", JSON.stringify(id));
     history.push("/quiz-subcategory");
   };
+
+  const logOut = () => {
+    localStorage.setItem('loginData',JSON.stringify(""));
+    history.push("/login-user");
+  }
+  
 
   const createquiz = () => {
     if (mainQuiz === "") {
@@ -75,30 +85,32 @@ const Index = () => {
 
   return (
     <div>
-      <h4 className="admin-index-text">QUIZ APP - ADMIN PANEL</h4>
+      {user.email === "Admin@gmail.com" ? (
+        <div>
+          <h4 className="admin-index-text">QUIZ APP - ADMIN PANEL</h4>
+          <Button color="outline-success" className="Logout-btn" onClick={logOut}>
+                  Logout  
+                </Button>
+          <h6 className="admin-index-subject">SUBJECT </h6>
 
-      <h6 className="admin-index-subject">SUBJECT</h6>
+          <div>
+            <Row className="mt-4 admin-input">
+              <Col md={8}>
+                <Input
+                  onChange={(event) => setmainQuiz(event.target.value)}
+                  value={mainQuiz}
+                  placeholder="ADD SUBJECT"
+                />
+              </Col>
 
-      <div>
-        <Container>
-          {user.email === "Admin@gmail.com" ? (
+              <Col md={4}>
+                <Button color="outline-dark" onClick={createquiz}>
+                  ADD SUBJECT
+                </Button>
+              </Col>
+            </Row>
             <div>
-              <Row className="mt-4 admin-input">
-                <Col md={8}>
-                  <Input
-                    onChange={(event) => setmainQuiz(event.target.value)}
-                    value={mainQuiz}
-                    placeholder="ADD SUBJECT"
-                  />
-                </Col>
-
-                <Col md={4}>
-                  <Button color="outline-dark" onClick={createquiz}>
-                    ADD SUBJECT
-                  </Button>
-                </Col>
-              </Row>
-              <div>
+              <Container>
                 <Row className="mt-4">
                   {data.length
                     ? data.map((item, index) => {
@@ -134,49 +146,69 @@ const Index = () => {
                       })
                     : null}
                 </Row>
-              </div>
+              </Container>
             </div>
-          ) : (
-            <div>
-              <Row className="mt-4">
-                {data.length
-                  ? data.map((item, index) => {
-                      return (
-                        <Col md={4} key={index}>
-                          <Card>
-                            <CardImg
-                              top
-                              width="100%"
-                              src={reactImg}
-                              alt="Card image cap"
-                            />
-                            <CardBody>
-                              <CardTitle value={item.quiz}>
-                                <b>Subject : </b> {item.quiz}
-                              </CardTitle>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div>
+            <Row >
+            
+            <div className="admin-index-text">
 
-                              <CardText>
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                              </CardText>
-                              <Button
-                                color="outline-success"
-                                onClick={() => valueGet(item.id)}
-                              >
-                                Show Quiz
-                              </Button>
-                            </CardBody>
-                          </Card>
-                        </Col>
-                      );
-                    })
-                  : null}
-              </Row>
+              QUIZ APP - {user.email}
+              
+                <Button color="outline-success" className="Logout-btn" onClick={logOut}>
+                  Logout  
+                </Button>
+                
             </div>
-          )}
-        </Container>
-      </div>
+              
+            </Row>
+        <Row>
+
+            <h6 className="admin-index-subject">SUBJECT</h6>
+        </Row>
+          </div>
+          <Container>
+            <Row className="mt-4">
+              {data.length
+                ? data.map((item, index) => {
+                    return (
+                      <Col md={4} key={index}>
+                        <Card>
+                          <CardImg
+                            top
+                            width="100%"
+                            src={reactImg}
+                            alt="Card image cap"
+                          />
+                          <CardBody>
+                            <CardTitle value={item.quiz}>
+                              <b>Subject : </b> {item.quiz}
+                            </CardTitle>
+
+                            <CardText>
+                              Some quick example text to build on the card title
+                              and make up the bulk of the card's content.
+                            </CardText>
+                            <Button
+                              color="outline-success"
+                              onClick={() => valueGet(item.id)}
+                            >
+                              Show Quiz
+                            </Button>
+                          </CardBody>
+                        </Card>
+                      </Col>
+                    );
+                  })
+                : null}
+            </Row>
+          </Container>
+        </div>
+      )}
     </div>
   );
 };

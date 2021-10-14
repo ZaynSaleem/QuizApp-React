@@ -26,6 +26,13 @@ const Login = () => {
     if (get && get.length) {
       setdata(get);
     }
+    let user = JSON.parse(localStorage.getItem("loginData"));
+    if (user) {
+      history.push("/user-panel");
+      
+    }
+    
+
   }, []);
 
   const loginUser = () => {
@@ -97,6 +104,11 @@ const Login = () => {
           </Col>
         </Row>
         <Row>
+        <Col>
+            <p className="mt-4">
+             Not a user? <a href="/">click here</a> to Register
+            </p>
+          </Col>
           <Col>
             <Button
               color="outline-success"
